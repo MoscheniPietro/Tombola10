@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Esercizio Tombola</title>
+</head>
+<body>
+  <h1 align="center" style="color: #cc2e2e">Estrazione Tombola Online</h1>
+  <ul id="numeri-estratti"></ul>
+  
+  <script>
+    
+    const socket = new WebSocket('ws://localhost:8080');
+
+    
+    socket.addEventListener('open', (event) => {
+      console.log('Connessione al server avvenuta con successo');
+    });
+
+    
+    socket.addEventListener('message', (event) => {
+      const numero = event.data;
+      const listaNumeri = document.getElementById('numeri-estratti');
+      const nuovoElemento = document.createElement('li');
+      nuovoElemento.textContent = `Numero estratto: ${numero}`;
+      listaNumeri.appendChild(nuovoElemento);
+    });
+  </script>
+</body>
+</html>
